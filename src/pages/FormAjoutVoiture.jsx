@@ -22,7 +22,7 @@ function Ajout_Voiture() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3000/Formulaire_Ajout_voiture", formAData)
+      .post("http://localhost:3000/Ajout_Voiture", formAData)
       .then((response) => {
         console.log("Données de la voiture ajoutée :", response.data);
         alert("Voiture ajoutée avec succès !");

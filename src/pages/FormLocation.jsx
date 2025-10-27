@@ -36,7 +36,7 @@ function FormLocation() {
       let updatedData = { ...prevData, [name]: value };
 
       if (name === "car_model") {
-        const selectedCar = db.Formulaire_Ajout_voiture.Ajout_Voiture.find(
+        const selectedCar = db.Ajout_Voiture.find(
           (row) => row.car_model === value
         );
         if (selectedCar) {
@@ -67,7 +67,7 @@ function FormLocation() {
     e.preventDefault();
 
     axios
-      .post("http://localhost:3000/Formulaire_Location_voiture", formData)
+      .post("http://localhost:3000/Location_Voiture", formData)
       .then((response) => {
         console.log("Données envoyées avec succès :", response.data);
         alert("Réservation réussie !");
@@ -94,7 +94,7 @@ function FormLocation() {
 
   const uniqueModels = [
     ...new Set(
-      db.Formulaire_Ajout_voiture.Ajout_Voiture.map((row) => row.car_model)
+      db.Ajout_Voiture.map((row) => row.car_model)
     ),
   ];
 

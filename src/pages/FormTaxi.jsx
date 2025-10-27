@@ -29,7 +29,7 @@ function FormTaxi() {
     e.preventDefault();
 
     axios
-      .post("http://localhost:3000/Formulaire_Chauffeur_Taxi", formData)
+      .post("http://localhost:3000/Chauffeur_Taxi", formData)
       .then((response) => {
         console.log("Donnees envoyees avec succes :", response.data);
         alert("Inscription reussie !");
