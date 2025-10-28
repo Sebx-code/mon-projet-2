@@ -18,8 +18,6 @@ function FormTaxi() {
     statut: "",
   });
 
-  
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -49,126 +47,158 @@ function FormTaxi() {
         });
       })
       .catch((error) => {
-        console.error("Erreur lors de l’envoi des donnees :", error);
+        console.error("Erreur lors de l'envoi des donnees :", error);
         alert("Une erreur est survenue lors de l'inscription !");
       });
   };
 
   return (
     <>
-      <h1>Formulaire d'inscription de chauffeur de taxi</h1>
+      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-soft border border-gray-200 dark:border-gray-700 overflow-y-auto overflow-hidden w-6xl m-5 p-5">
+        <h1 className="mx-auto w-fit font-bold m-2 text-3xl">
+          Formulaire d'inscription de chauffeur de taxi
+        </h1>
 
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="driver_name">Nom du chauffeur :</label>
-        <input
-          type="text"
-          name="driver_name"
-          id="driver_name"
-          onChange={handleChange}
-          value={formData.driver_name}
-        />
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+          <label htmlFor="driver_name">Nom du chauffeur :</label>
+          <input
+            className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            type="text"
+            id="driver_name"
+            name="driver_name"
+            value={formData.driver_name}
+            onChange={handleChange}
+            required
+          />
 
-        <label htmlFor="date_of_birth">Date de naissance :</label>
-        <input
-          type="date"
-          name="date_of_birth"
-          id="date_of_birth"
-          onChange={handleChange}
-          value={formData.date_of_birth}
-        />
+          <label htmlFor="date_of_birth">Date de naissance :</label>
+          <input
+            className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            type="date"
+            id="date_of_birth"
+            name="date_of_birth"
+            value={formData.date_of_birth}
+            onChange={handleChange}
+            required
+          />
 
-        <label htmlFor="telephone">Numero de telephone :</label>
-        <input
-          type="tel"
-          name="telephone"
-          id="telephone"
-          onChange={handleChange}
-          value={formData.telephone}
-        />
+          <label htmlFor="telephone">Numéro de téléphone :</label>
+          <input
+            className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            type="tel"
+            id="telephone"
+            name="telephone"
+            value={formData.telephone}
+            onChange={handleChange}
+            required
+          />
 
-        <label htmlFor="adresse">Adresse :</label>
-        <input
-          type="text"
-          name="adresse"
-          id="adresse"
-          onChange={handleChange}
-          value={formData.adresse}
-        />
+          <label htmlFor="adresse">Adresse :</label>
+          <input
+            className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            type="text"
+            id="adresse"
+            name="adresse"
+            value={formData.adresse}
+            onChange={handleChange}
+            required
+          />
 
-        <label htmlFor="driver's_licence_number">
-          Numero du permis de conduire :
-        </label>
-        <input
-          type="text"
-          name="drivers_licence_number"
-          id="drivers_licence_number"
-          onChange={handleChange}
-          value={formData.drivers_licence_number}
-        />
+          <label htmlFor="drivers_licence_number">
+            Numéro du permis de conduire :
+          </label>
+          <input
+            className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            type="text"
+            id="drivers_licence_number"
+            name="drivers_licence_number"
+            value={formData.drivers_licence_number}
+            onChange={handleChange}
+            required
+          />
 
-        <label htmlFor="experience_year">Année d'experience :</label>
-        <input
-          type="date"
-          name="experience_year"
-          id="experience_year"
-          onChange={handleChange}
-          value={formData.experience_year}
-        />
+          <label htmlFor="experience_year">Année d'expérience :</label>
+          <input
+            className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            type="text"
+            id="experience_year"
+            name="experience_year"
+            value={formData.experience_year}
+            onChange={handleChange}
+            required
+          />
 
-        <label htmlFor="vehicule_attribuer">Véhicule attribué</label>
-        <select
-          name="vehicule_attribuer"
-          id="vehicule_attribuer"
-          onChange={handleChange}
-          value={formData.vehicule_attribuer}
-        >
-          <option value=""></option>
-        </select>
+          <label htmlFor="vehicule_attribuer">Véhicule attribué :</label>
+          <select
+            className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            name="vehicule_attribuer"
+            id="vehicule_attribuer"
+            onChange={handleChange}
+            value={formData.vehicule_attribuer}
+            required
+          >
+            <option value="">-- Sélectionnez un véhicule --</option>
+          </select>
 
-        <label htmlFor="immatriculation_number">
-          Numero d'Immatriculation :
-        </label>
-        <input
-          type="text"
-          name="immatriculation_number"
-          id="immatriculation_number"
-          onChange={handleChange}
-          value={formData.immatriculation_number}
-        />
+          <label htmlFor="immatriculation_number">
+            Numéro d'immatriculation :
+          </label>
+          <input
+            className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            type="text"
+            id="immatriculation_number"
+            name="immatriculation_number"
+            value={formData.immatriculation_number}
+            onChange={handleChange}
+            required
+          />
 
-        <label htmlFor="cni_number">Numero de CNI :</label>
-        <input
-          type="text"
-          name="cni_number"
-          id="cni_number"
-          onChange={handleChange}
-          value={formData.cni_number}
-        />
+          <label htmlFor="cni_number">Numéro de CNI :</label>
+          <input
+            className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            type="text"
+            id="cni_number"
+            name="cni_number"
+            value={formData.cni_number}
+            onChange={handleChange}
+            required
+          />
 
-        <label htmlFor="date_embauche">Date d'embauche :</label>
-        <input
-          type="text"
-          name="date_embauche"
-          id="date_embauche"
-          onChange={handleChange}
-          value={formData.date_embauche}
-        />
+          <label htmlFor="date_embauche">Date d'embauche :</label>
+          <input
+            className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            type="date"
+            id="date_embauche"
+            name="date_embauche"
+            value={formData.date_embauche}
+            onChange={handleChange}
+            required
+          />
 
-        <label htmlFor="statut">Statut</label>
-        <select
-          name="statut"
-          id="statut"
-          onChange={handleChange}
-          value={formData.statut}
-        >
-          <option value="Actif">Actif</option>
-          <option value="Inactif">Inactif</option>
-          <option value="En congé">En congé</option>
-          <option value="En mission">En mission</option>
-        </select>
+          <label htmlFor="statut">Statut :</label>
+          <select
+            className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            name="statut"
+            id="statut"
+            onChange={handleChange}
+            value={formData.statut}
+            required
+          >
+            <option value="">-- Sélectionnez un statut --</option>
+            <option value="Actif">Actif</option>
+            <option value="Inactif">Inactif</option>
+            <option value="En congé">En congé</option>
+            <option value="En mission">En mission</option>
+          </select>
 
-        <input type="submit" value="Envoyer" />
-      </form>
+          <button
+            type="submit"
+            className="bg-blue-600 text-white rounded-lg p-2 mt-3 hover:bg-blue-700 transition-colors"
+          >
+            Enregistrer
+          </button>
+        </form>
+      </div>
     </>
   );
 }

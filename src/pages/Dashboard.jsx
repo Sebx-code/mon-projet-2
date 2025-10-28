@@ -11,6 +11,8 @@ import Dot from "../assets/DashboardIconDot.jsx";
 import Driverx from "../components/Driverx.jsx";
 import FormLocation from "./FormLocation.jsx";
 import Reserv from "./Reservation.jsx";
+import FormTaxi from "./FormTaxi.jsx";
+import FormAjoutVoiture from "./FormAjoutVoiture.jsx";
 
 function Dashboard() {
   const getStatusColor = (status) => {
@@ -138,14 +140,14 @@ function Dashboard() {
                 <span className="font-medium">Reservations</span>
               </button>
 
-              <button className="w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left transition-all duration-200 group text-gray-300 hover:bg-gray-800/50 hover:text-white">
+              <button className="w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left transition-all duration-200 group text-gray-300 hover:bg-gray-800/50 hover:text-white" onClick={() => setActiveTab("form-taxi")}>
                 <div className="p-2 rounded-lg bg-gray-700 group-hover:bg-gray-600 transition-colors">
                   <DriveIcn />
                 </div>
                 <span className="font-medium">Add Driver</span>
               </button>
 
-              <button className="w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left transition-all duration-200 group text-gray-300 hover:bg-gray-800/50 hover:text-white">
+              <button className="w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left transition-all duration-200 group text-gray-300 hover:bg-gray-800/50 hover:text-white" onClick={() => setActiveTab("form-voiture")}>
                 <div className="p-2 rounded-lg bg-gray-700 group-hover:bg-gray-600 transition-colors">
                   <CarIcon />
                 </div>
@@ -158,7 +160,7 @@ function Dashboard() {
         {/* Main Content */}
         {activeTab === "dashboard" && (
           <div className="p-6 bg-gray-900 text-gray-200 min-h-screen flex flex-col justify-between items-center">
-            <div className="">Dashboard Content</div>
+            <div className=""></div>
             <div className="overflow-y-auto rounded-3xl overflow-hidden">
               <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
                 <div className="flex items-center justify-between">
@@ -176,17 +178,29 @@ function Dashboard() {
                 </div>
               </div>
 
-              <table className="w-full text-left border-collapse rounded-3xl overflow-hidden border border-gray-500">
+              <table className="w-full text-left border-collapse rounded-3xl overflow-hidden border-gray-500">
                 <thead>
                   <tr className="text-gray-400 text-sm bg-gray-900">
-                    <th className="px-4 py-2 border border-gray-500">Car number</th>
-                    <th className="px-4 py-2 border border-gray-500">Car's type</th>
-                    <th className="px-4 py-2 border border-gray-500">Car model</th>
-                    <th className="px-4 py-2 border border-gray-500">License plate</th>
+                    <th className="px-4 py-2 border border-gray-500">
+                      Car number
+                    </th>
+                    <th className="px-4 py-2 border border-gray-500">
+                      Car's type
+                    </th>
+                    <th className="px-4 py-2 border border-gray-500">
+                      Car model
+                    </th>
+                    <th className="px-4 py-2 border border-gray-500">
+                      License plate
+                    </th>
                     <th className="px-4 py-2 border border-gray-500">Year</th>
                     <th className="px-4 py-2 border border-gray-500">Color</th>
-                    <th className="px-4 py-2 border border-gray-500">Mileage</th>
-                    <th className="px-4 py-2 border border-gray-500">Daily price</th>
+                    <th className="px-4 py-2 border border-gray-500">
+                      Mileage
+                    </th>
+                    <th className="px-4 py-2 border border-gray-500">
+                      Daily price
+                    </th>
                     <th className="px-4 py-2 border border-gray-500">Status</th>
                     <th className="px-4 py-2 border border-gray-500">Action</th>
                   </tr>
@@ -195,21 +209,40 @@ function Dashboard() {
                   {db.Ajout_Voiture.slice()
                     .reverse()
                     .map((row) => (
-                      <tr key={row.id} className="text-sm bg-gray-800 hover:bg-gray-700 transition">
-                        <td className="px-4 py-3 font-semibold border border-gray-500">{row.id}</td>
+                      <tr
+                        key={row.id}
+                        className="text-sm bg-gray-800 hover:bg-gray-700 transition"
+                      >
+                        <td className="px-4 py-3 font-semibold border border-gray-500">
+                          {row.id}
+                        </td>
                         <td className="px-4 py-3 border border-gray-500">
                           <p className="font-medium">{row.car_type}</p>
                         </td>
                         <td className="px-4 py-3 border border-gray-500">
                           <p className="font-medium">{row.car_model}</p>
                         </td>
-                        <td className="px-4 py-3 border border-gray-500">{row.license_plate}</td>
-                        <td className="px-4 py-3 border border-gray-500">{row.year}</td>
-                        <td className="px-4 py-3 truncate max-w-xs border border-gray-500">{row.color}</td>
-                        <td className="px-4 py-3 font-semibold border border-gray-500">{row.mileage}</td>
-                        <td className="px-4 py-3 font-semibold border border-gray-500">{row.daily_price}</td>
                         <td className="px-4 py-3 border border-gray-500">
-                          <span className={`px-3 py-1 rounded-full text-[7px] font-semibold ${getStatusColor(row.status)}`}>
+                          {row.license_plate}
+                        </td>
+                        <td className="px-4 py-3 border border-gray-500">
+                          {row.year}
+                        </td>
+                        <td className="px-4 py-3 truncate max-w-xs border border-gray-500">
+                          {row.color}
+                        </td>
+                        <td className="px-4 py-3 font-semibold border border-gray-500">
+                          {row.mileage}
+                        </td>
+                        <td className="px-4 py-3 font-semibold border border-gray-500">
+                          {row.daily_price}
+                        </td>
+                        <td className="px-4 py-3 border border-gray-500">
+                          <span
+                            className={`px-3 py-1 rounded-full text-[7px] font-semibold ${getStatusColor(
+                              row.status
+                            )}`}
+                          >
                             {row.status}
                           </span>
                         </td>
@@ -242,6 +275,10 @@ function Dashboard() {
         {activeTab === "form-location" && (
           <FormLocation onNavigateBack={() => setActiveTab("reservations")} />
         )}
+
+        {activeTab === "form-taxi" && <FormTaxi />}
+
+        {activeTab === "form-voiture" && <FormAjoutVoiture />}
       </div>
     </>
   );
