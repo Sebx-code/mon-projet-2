@@ -464,6 +464,21 @@
       "total_price": "335000.00",
       "caution": "70000",
       "payment_method": "paypal"
+    },
+    {
+      "id": "70d8",
+      "client_name": "Joseph Atangana",
+      "identity_number": "1314151617186",
+      "client_phone": "656642801",
+      "client_address": "Nkolnda",
+      "car_model": "Tucson",
+      "license_plate": "YZ890AB",
+      "rental_start": "2025-10-29",
+      "rental_end": "2025-11-02",
+      "daily_price": "70000",
+      "total_price": "280000.00",
+      "caution": "70000",
+      "payment_method": "credit_card"
     }
   ],
   "Ajout_Voiture": [

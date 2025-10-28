@@ -11,6 +11,7 @@ import db from "../../db.json";
 import Dot from "../assets/DashboardIconDot.jsx";
 import Driverx from "../components/Driverx.jsx";
 import FormLocation from "./FormLocation.jsx";
+import Reserv from "./Reservation.jsx";
 
 function Dashboard() {
   const getStatusColor = (status) => {
@@ -126,7 +127,7 @@ function Dashboard() {
 
               <button
                 className="w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left transition-all duration-200 group text-gray-300 hover:bg-gray-800/50 hover:text-white"
-                onClick={() => setActiveTab("formlocation")}
+                onClick={() => setActiveTab("reservation")}
               >
                 <div className="p-2 rounded-lg bg-gray-700 group-hover:bg-gray-600 transition-colors">
                   <ReIcon />
@@ -253,6 +254,7 @@ function Dashboard() {
         )}
         {activeTab === "drivers-tab" && <Driverx />}
         {activeTab === "formlocation" && <FormLocation />}
+        {activeTab === "reservation" && <Reserv />}
       </div>
     </>
   );
