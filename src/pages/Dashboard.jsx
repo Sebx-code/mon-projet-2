@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "../App.css";
-// import axios from "axios";
 import Icon from "../assets/DashboardIcon";
 import ChartIcon from "../assets/DashboardChart.jsx";
 import DriverIcon from "../assets/DashboardDriverIcon.jsx";
@@ -96,20 +95,20 @@ function Dashboard() {
 
               <button
                 className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left transition-all duration-200 group ${
-                  activeTab === "drivers-tab"
+                  activeTab === "drivers"
                     ? "bg-primary-500/20 text-primary-400 border border-primary-500/30 shadow-soft"
                     : "text-gray-300 hover:bg-gray-800/50 hover:text-white"
                 }`}
-                onClick={() => setActiveTab("drivers-tab")}
+                onClick={() => setActiveTab("drivers")}
               >
                 <div
                   className={`p-2 rounded-lg transition-colors ${
-                    activeTab === "drivers-tab"
+                    activeTab === "drivers"
                       ? "bg-primary-500/20"
                       : "bg-gray-700 group-hover:bg-gray-600"
                   }`}
                 >
-                  <ChartIcon />
+                  <DriverIcon />
                 </div>
                 <span className="font-medium">Drivers</span>
               </button>
@@ -126,8 +125,12 @@ function Dashboard() {
               </h3>
 
               <button
-                className="w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left transition-all duration-200 group text-gray-300 hover:bg-gray-800/50 hover:text-white"
-                onClick={() => setActiveTab("reservation")}
+                className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl text-left transition-all duration-200 group ${
+                  activeTab === "reservations" || activeTab === "form-location"
+                    ? "bg-primary-500/20 text-primary-400 border border-primary-500/30 shadow-soft"
+                    : "text-gray-300 hover:bg-gray-800/50 hover:text-white"
+                }`}
+                onClick={() => setActiveTab("reservations")}
               >
                 <div className="p-2 rounded-lg bg-gray-700 group-hover:bg-gray-600 transition-colors">
                   <ReIcon />
@@ -152,9 +155,10 @@ function Dashboard() {
           </nav>
         </div>
 
+        {/* Main Content */}
         {activeTab === "dashboard" && (
           <div className="p-6 bg-gray-900 text-gray-200 min-h-screen flex flex-col justify-between items-center">
-            <div className="">hgfhjgfhgfhg</div>
+            <div className="">Dashboard Content</div>
             <div className="overflow-y-auto rounded-3xl overflow-hidden">
               <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
                 <div className="flex items-center justify-between">
@@ -175,26 +179,14 @@ function Dashboard() {
               <table className="w-full text-left border-collapse rounded-3xl overflow-hidden border border-gray-500">
                 <thead>
                   <tr className="text-gray-400 text-sm bg-gray-900">
-                    <th className="px-4 py-2 border border-gray-500">
-                      Car number
-                    </th>
-                    <th className="px-4 py-2 border border-gray-500">
-                      Car's type
-                    </th>
-                    <th className="px-4 py-2 border border-gray-500">
-                      Car model
-                    </th>
-                    <th className="px-4 py-2 border border-gray-500">
-                      License plate
-                    </th>
+                    <th className="px-4 py-2 border border-gray-500">Car number</th>
+                    <th className="px-4 py-2 border border-gray-500">Car's type</th>
+                    <th className="px-4 py-2 border border-gray-500">Car model</th>
+                    <th className="px-4 py-2 border border-gray-500">License plate</th>
                     <th className="px-4 py-2 border border-gray-500">Year</th>
                     <th className="px-4 py-2 border border-gray-500">Color</th>
-                    <th className="px-4 py-2 border border-gray-500">
-                      Mileage
-                    </th>
-                    <th className="px-4 py-2 border border-gray-500">
-                      Daily price
-                    </th>
+                    <th className="px-4 py-2 border border-gray-500">Mileage</th>
+                    <th className="px-4 py-2 border border-gray-500">Daily price</th>
                     <th className="px-4 py-2 border border-gray-500">Status</th>
                     <th className="px-4 py-2 border border-gray-500">Action</th>
                   </tr>
@@ -203,40 +195,21 @@ function Dashboard() {
                   {db.Ajout_Voiture.slice()
                     .reverse()
                     .map((row) => (
-                      <tr
-                        key={row.id}
-                        className=" text-sm bg-gray-800 hover:bg-gray-700 transition"
-                      >
-                        <td className="px-4 py-3 font-semibold border border-gray-500">
-                          {row.id}
-                        </td>
+                      <tr key={row.id} className="text-sm bg-gray-800 hover:bg-gray-700 transition">
+                        <td className="px-4 py-3 font-semibold border border-gray-500">{row.id}</td>
                         <td className="px-4 py-3 border border-gray-500">
                           <p className="font-medium">{row.car_type}</p>
                         </td>
                         <td className="px-4 py-3 border border-gray-500">
                           <p className="font-medium">{row.car_model}</p>
                         </td>
+                        <td className="px-4 py-3 border border-gray-500">{row.license_plate}</td>
+                        <td className="px-4 py-3 border border-gray-500">{row.year}</td>
+                        <td className="px-4 py-3 truncate max-w-xs border border-gray-500">{row.color}</td>
+                        <td className="px-4 py-3 font-semibold border border-gray-500">{row.mileage}</td>
+                        <td className="px-4 py-3 font-semibold border border-gray-500">{row.daily_price}</td>
                         <td className="px-4 py-3 border border-gray-500">
-                          {row.license_plate}
-                        </td>
-                        <td className="px-4 py-3 border border-gray-500">
-                          {row.year}
-                        </td>
-                        <td className="px-4 py-3 truncate max-w-xs border border-gray-500">
-                          {row.color}
-                        </td>
-                        <td className="px-4 py-3 font-semibold border border-gray-500">
-                          {row.mileage}
-                        </td>
-                        <td className="px-4 py-3 font-semibold border border-gray-500">
-                          {row.daily_price}
-                        </td>
-                        <td className="px-4 py-3 border border-gray-500">
-                          <span
-                            className={`px-3 py-1 rounded-full text-[7px] font-semibold ${getStatusColor(
-                              row.status
-                            )}`}
-                          >
+                          <span className={`px-3 py-1 rounded-full text-[7px] font-semibold ${getStatusColor(row.status)}`}>
                             {row.status}
                           </span>
                         </td>
@@ -252,9 +225,23 @@ function Dashboard() {
             </div>
           </div>
         )}
-        {activeTab === "drivers-tab" && <Driverx />}
-        {activeTab === "formlocation" && <FormLocation />}
-        {activeTab === "reservation" && <Reserv />}
+
+        {activeTab === "statistics" && (
+          <div className="p-6 bg-gray-900 text-gray-200 min-h-screen">
+            <h2 className="text-2xl font-bold mb-4">Statistics</h2>
+            {/* Votre contenu statistics ici */}
+          </div>
+        )}
+
+        {activeTab === "drivers" && <Driverx />}
+
+        {activeTab === "reservations" && (
+          <Reserv onNavigateToForm={() => setActiveTab("form-location")} />
+        )}
+
+        {activeTab === "form-location" && (
+          <FormLocation onNavigateBack={() => setActiveTab("reservations")} />
+        )}
       </div>
     </>
   );
