@@ -174,22 +174,22 @@ function Ajout_Voiture() {
 
               <div>
                 <label htmlFor="daily_price" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  Prix par jour (€) *
+                  Prix par jour (FCFA) *
                 </label>
                 <div className="relative">
                   <input
-                    className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors pl-10"
+                    className="w-full border border-gray-300 dark:border-gray-600 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors pl-12"
                     type="number"
                     id="daily_price"
                     name="daily_price"
                     value={formAData.daily_price}
                     onChange={handleChange}
                     min="0"
-                    step="0.01"
-                    placeholder="0.00"
+                    step="1000"
+                    placeholder="10000"
                     required
                   />
-                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">€</span>
+                  <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">FCFA</span>
                 </div>
               </div>
 
@@ -212,28 +212,24 @@ function Ajout_Voiture() {
                 </select>
               </div>
             </div>
+            {/* Footer avec bouton - placé à l'intérieur du formulaire pour activer la validation native */}
+            <div className="md:col-span-2 bg-gray-50 dark:bg-gray-700 px-6 py-4 border-t border-gray-200 dark:border-gray-600">
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-gray-500 dark:text-gray-400">* Champs obligatoires</span>
+                <button
+                  type="submit"
+                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium rounded-lg px-6 py-3 transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 shadow-md"
+                >
+                  <span className="flex items-center">
+                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    </svg>
+                    Ajouter la voiture
+                  </span>
+                </button>
+              </div>
+            </div>
           </form>
-        </div>
-
-        {/* Footer avec bouton */}
-        <div className="bg-gray-50 dark:bg-gray-700 px-6 py-4 border-t border-gray-200 dark:border-gray-600">
-          <div className="flex justify-between items-center">
-            <span className="text-sm text-gray-500 dark:text-gray-400">
-              * Champs obligatoires
-            </span>
-            <button
-              type="submit"
-              className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium rounded-lg px-6 py-3 transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 shadow-md"
-              onClick={handleSubmit}
-            >
-              <span className="flex items-center">
-                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                </svg>
-                Ajouter la voiture
-              </span>
-            </button>
-          </div>
         </div>
       </div>
     </>

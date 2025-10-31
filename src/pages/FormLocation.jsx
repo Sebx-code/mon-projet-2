@@ -2,7 +2,6 @@ import { useState } from "react";
 import "../App.css";
 import axios from "axios";
 import db from "../../db.json";
-import Reserv from "./Reservation";
 
 function FormLocation({ onNavigateBack }) {
   const [formData, setFormData] = useState({
@@ -98,169 +97,187 @@ function FormLocation({ onNavigateBack }) {
   ];
 
   return (
-    <>
-      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-soft border border-gray-200 dark:border-gray-700 overflow-y-auto overflow-hidden w-6xl m-5 p-5">
-        <button onClick={onNavigateBack} className="text-white underline">
-          Retour
-        </button>
-        <h1 className="mx-auto w-fit font-bold m-2 text-3xl">
-          Formulaire de location de voiture
-        </h1>
+    <div className="overflow-x-auto">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-soft border border-gray-200 dark:border-gray-700 overflow-x-auto overflow-hidden w-6xl m-5">
+        {/* Header avec gradient pour cohérence visuelle */}
+        <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-4 rounded-t-2xl">
+          <div className="flex items-center justify-between">
+            <button
+              onClick={onNavigateBack}
+              className="text-blue-100 underline"
+            >
+              Retour
+            </button>
+            <h1 className="mx-auto w-fit font-bold m-2 text-3xl text-white">
+              Formulaire de location de voiture
+            </h1>
+            <div className="w-20" />
+          </div>
+        </div>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-          <label htmlFor="client_name">Nom du client :</label>
-          <input
-            className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            type="text"
-            id="client_name"
-            name="client_name"
-            value={formData.client_name}
-            onChange={handleChange}
-            required
-          />
+        <div className="p-5 overflow-x-scroll">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+            <label htmlFor="client_name">Nom du client :</label>
+            <input
+              className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              type="text"
+              id="client_name"
+              name="client_name"
+              value={formData.client_name}
+              onChange={handleChange}
+              placeholder="John Bold"
+              required
+            />
 
-          <label htmlFor="identity_number">Numéro de pièce d'identité :</label>
-          <input
-            className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            type="text"
-            id="identity_number"
-            name="identity_number"
-            value={formData.identity_number}
-            onChange={handleChange}
-            required
-          />
+            <label htmlFor="identity_number">
+              Numéro de pièce d'identité :
+            </label>
+            <input
+              className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              type="text"
+              id="identity_number"
+              name="identity_number"
+              value={formData.identity_number}
+              onChange={handleChange}
+              required
+            />
 
-          <label htmlFor="client_phone">Téléphone du client :</label>
-          <input
-            className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            type="tel"
-            id="client_phone"
-            name="client_phone"
-            value={formData.client_phone}
-            onChange={handleChange}
-            required
-          />
+            <label htmlFor="client_phone">Téléphone du client :</label>
+            <input
+              className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              type="tel"
+              id="client_phone"
+              name="client_phone"
+              value={formData.client_phone}
+              onChange={handleChange}
+              placeholder="6 56 64 28 01"
+              required
+            />
 
-          <label htmlFor="client_address">Adresse du client :</label>
-          <input
-            className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            type="text"
-            id="client_address"
-            name="client_address"
-            value={formData.client_address}
-            onChange={handleChange}
-            required
-          />
+            <label htmlFor="client_address">Adresse du client :</label>
+            <input
+              className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              type="text"
+              id="client_address"
+              name="client_address"
+              value={formData.client_address}
+              onChange={handleChange}
+              placeholder="Nkolnda"
+              required
+            />
 
-          <label htmlFor="car_model">Modèle de la voiture :</label>
-          <select
-            className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            id="car_model"
-            name="car_model"
-            value={formData.car_model}
-            onChange={handleChange}
-            required
-          >
-            <option value="">-- Sélectionnez un modèle --</option>
-            {uniqueModels.map((model, index) => (
-              <option key={index} value={model}>
-                {model}
-              </option>
-            ))}
-          </select>
+            <label htmlFor="car_model">Modèle de la voiture :</label>
+            <select
+              className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              id="car_model"
+              name="car_model"
+              value={formData.car_model}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Sélectionnez un modèle</option>
+              {uniqueModels.map((model, index) => (
+                <option key={index} value={model}>
+                  {model}
+                </option>
+              ))}
+            </select>
 
-          <label htmlFor="license_plate">Immatriculation du véhicule :</label>
-          <input
-            className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            type="text"
-            id="license_plate"
-            name="license_plate"
-            value={formData.license_plate}
-            onChange={handleChange}
-            required
-          />
+            <label htmlFor="license_plate">Immatriculation du véhicule :</label>
+            <input
+              className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              type="text"
+              id="license_plate"
+              name="license_plate"
+              value={formData.license_plate}
+              onChange={handleChange}
+              required
+            />
 
-          <label htmlFor="rental_start">Date de début :</label>
-          <input
-            className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            type="date"
-            id="rental_start"
-            name="rental_start"
-            value={formData.rental_start}
-            onChange={handleChange}
-            required
-          />
+            <label htmlFor="rental_start">Date de début :</label>
+            <input
+              className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              type="date"
+              id="rental_start"
+              name="rental_start"
+              value={formData.rental_start}
+              onChange={handleChange}
+              required
+            />
 
-          <label htmlFor="rental_end">Date de fin :</label>
-          <input
-            className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            type="date"
-            id="rental_end"
-            name="rental_end"
-            value={formData.rental_end}
-            min={formData.rental_start}
-            onChange={handleChange}
-            required
-          />
+            <label htmlFor="rental_end">Date de fin :</label>
+            <input
+              className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              type="date"
+              id="rental_end"
+              name="rental_end"
+              value={formData.rental_end}
+              min={formData.rental_start}
+              onChange={handleChange}
+              required
+            />
 
-          <label htmlFor="daily_price">Prix par jour :</label>
-          <input
-            className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            type="number"
-            id="daily_price"
-            name="daily_price"
-            value={formData.daily_price}
-            onChange={handleChange}
-            readOnly
-            required
-          />
+            <label htmlFor="daily_price">Prix par jour :</label>
+            <input
+              className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              type="number"
+              id="daily_price"
+              name="daily_price"
+              value={formData.daily_price}
+              onChange={handleChange}
+              readOnly
+              required
+            />
 
-          <label htmlFor="total_price">Prix total :</label>
-          <input
-            className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            type="text"
-            id="total_price"
-            name="total_price"
-            value={formData.total_price}
-            readOnly
-          />
+            <label htmlFor="total_price">Prix total :</label>
+            <input
+              className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              type="text"
+              id="total_price"
+              name="total_price"
+              value={formData.total_price}
+              readOnly
+            />
 
-          <label htmlFor="caution">Caution :</label>
-          <input
-            className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            type="text"
-            id="caution"
-            name="caution"
-            value={formData.caution}
-            onChange={handleChange}
-            required
-          />
+            <label htmlFor="caution">Caution :</label>
+            <input
+              className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              type="text"
+              id="caution"
+              name="caution"
+              value={formData.caution}
+              onChange={handleChange}
+              required
+            />
 
-          <label htmlFor="payment_method">Mode de paiement :</label>
-          <select
-            className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            id="payment_method"
-            name="payment_method"
-            value={formData.payment_method}
-            onChange={handleChange}
-            required
-          >
-            <option value="">-- Sélectionnez --</option>
-            <option value="credit_card">Carte de crédit</option>
-            <option value="paypal">Espèces</option>
-            <option value="bank_transfer">Virement</option>
-            <option value="orange_money">Chèque</option>
-          </select>
+            <label htmlFor="payment_method">Mode de paiement :</label>
+            <select
+              className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              id="payment_method"
+              name="payment_method"
+              value={formData.payment_method}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Sélectionnez</option>
+              <option value="credit_card">Carte de crédit</option>
+              <option value="paypal">Espèces</option>
+              <option value="bank_transfer">Virement</option>
+              <option value="orange_money">Chèque</option>
+            </select>
 
-          <button
-            type="submit"
-            className="bg-blue-600 text-white rounded-lg p-2 mt-3"
-          >
-            Réserver
-          </button>
-        </form>
+            <div className="mt-4 flex justify-end">
+              <button
+                type="submit"
+                className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium rounded-lg px-6 py-3 transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 shadow-md"
+              >
+                Réserver
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
-    </>
+    </div>
   );
 }
 

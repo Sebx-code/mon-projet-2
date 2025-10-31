@@ -53,13 +53,16 @@ function FormTaxi() {
   };
 
   return (
-    <>
-      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-soft border border-gray-200 dark:border-gray-700 overflow-y-auto overflow-hidden w-6xl m-5 p-5">
-        <h1 className="mx-auto w-fit font-bold m-2 text-3xl">
-          Formulaire d'inscription de chauffeur de taxi
-        </h1>
+    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-soft border border-gray-200 dark:border-gray-700 overflow-y-auto overflow-hidden w-6xl m-5">
+        {/* Header gradient pour cohérence */}
+        <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-4 rounded-t-2xl">
+          <h1 className="mx-auto w-fit font-bold m-2 text-3xl text-white">
+            Formulaire d'inscription de chauffeur de taxi
+          </h1>
+        </div>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+        <div className="p-5">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           <label htmlFor="driver_name">Nom du chauffeur :</label>
           <input
             className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -191,15 +194,17 @@ function FormTaxi() {
             <option value="En mission">En mission</option>
           </select>
 
-          <button
-            type="submit"
-            className="bg-blue-600 text-white rounded-lg p-2 mt-3 hover:bg-blue-700 transition-colors"
-          >
-            Enregistrer
-          </button>
+          <div className="mt-4 flex justify-end">
+            <button
+              type="submit"
+              className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium rounded-lg px-6 py-3 transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 shadow-md"
+            >
+              Enregistrer
+            </button>
+          </div>
         </form>
       </div>
-    </>
+      </div>
   );
 }
 
