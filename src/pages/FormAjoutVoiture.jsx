@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../App.css";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
-function Ajout_Voiture() {
+function Ajout_Voiture({ initialData = null, onSaved }) {
   const [formAData, setFormAData] = useState({
     car_type: "",
     car_model: "",
@@ -14,6 +15,21 @@ function Ajout_Voiture() {
     status: "",
   });
 
+  useEffect(() => {
+    if (initialData) {
+      setFormAData({
+        car_type: initialData.car_type || "",
+        car_model: initialData.car_model || "",
+        license_plate: initialData.license_plate || "",
+        year: initialData.year || "",
+        color: initialData.color || "",
+        mileage: initialData.mileage || "",
+        daily_price: initialData.daily_price || "",
+        status: initialData.status || "",
+      });
+    }
+  }, [initialData]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormAData({ ...formAData, [name]: value });
@@ -21,25 +37,38 @@ function Ajout_Voiture() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:3000/Ajout_Voiture", formAData)
+    const url = initialData?.id
+      ? `http://localhost:3000/Ajout_Voiture/${initialData.id}`
+      : "http://localhost:3000/Ajout_Voiture";
+    const method = initialData?.id ? axios.put : axios.post;
+
+    method(url, formAData)
       .then((response) => {
-        console.log("Données de la voiture ajoutée :", response.data);
-        alert("Voiture ajoutée avec succès !");
-        setFormAData({
-          car_type: "",
-          car_model: "",
-          license_plate: "",
-          year: "",
-          color: "",
-          mileage: "",
-          daily_price: "",
-          status: "",
-        });
+        const saved = initialData?.id
+          ? { id: initialData.id, ...formAData }
+          : response.data;
+        alert(
+          initialData?.id
+            ? "Véhicule mis à jour !"
+            : "Voiture ajoutée avec succès !"
+        );
+        if (onSaved) onSaved(saved);
+        if (!initialData?.id) {
+          setFormAData({
+            car_type: "",
+            car_model: "",
+            license_plate: "",
+            year: "",
+            color: "",
+            mileage: "",
+            daily_price: "",
+            status: "",
+          });
+        }
       })
       .catch((error) => {
-        console.error("Erreur lors de l'ajout de la voiture :", error);
-        alert("Une erreur est survenue lors de l'ajout de la voiture !");
+        console.error("Erreur lors de l'enregistrement du véhicule :", error);
+        alert("Une erreur est survenue lors de l'enregistrement du véhicule !");
       });
   };
 
@@ -51,7 +80,9 @@ function Ajout_Voiture() {
         {/* Header avec fond accentué */}
         <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-4">
           <h1 className="text-white text-2xl font-bold text-center">
-            Formulaire d'ajout d'une voiture
+            {initialData
+              ? "Modifier un véhicule"
+              : "Formulaire d'ajout d'une voiture"}
           </h1>
           <p className="text-blue-100 text-sm text-center mt-1">
             Remplissez les informations du véhicule
@@ -60,11 +91,17 @@ function Ajout_Voiture() {
 
         {/* Corps du formulaire */}
         <div className="p-6">
-          <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <form
+            onSubmit={handleSubmit}
+            className="grid grid-cols-1 md:grid-cols-2 gap-4"
+          >
             {/* Colonne 1 */}
             <div className="space-y-4">
               <div>
-                <label htmlFor="car_type" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label
+                  htmlFor="car_type"
+                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                >
                   Type de voiture *
                 </label>
                 <select
@@ -86,7 +123,10 @@ function Ajout_Voiture() {
               </div>
 
               <div>
-                <label htmlFor="car_model" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label
+                  htmlFor="car_model"
+                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                >
                   Modèle de la voiture *
                 </label>
                 <input
@@ -102,7 +142,10 @@ function Ajout_Voiture() {
               </div>
 
               <div>
-                <label htmlFor="license_plate" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label
+                  htmlFor="license_plate"
+                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                >
                   Immatriculation *
                 </label>
                 <input
@@ -118,7 +161,10 @@ function Ajout_Voiture() {
               </div>
 
               <div>
-                <label htmlFor="year" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label
+                  htmlFor="year"
+                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                >
                   Année de fabrication *
                 </label>
                 <input
@@ -139,7 +185,10 @@ function Ajout_Voiture() {
             {/* Colonne 2 */}
             <div className="space-y-4">
               <div>
-                <label htmlFor="color" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label
+                  htmlFor="color"
+                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                >
                   Couleur *
                 </label>
                 <input
@@ -155,7 +204,10 @@ function Ajout_Voiture() {
               </div>
 
               <div>
-                <label htmlFor="mileage" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label
+                  htmlFor="mileage"
+                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                >
                   Kilométrage (km) *
                 </label>
                 <input
@@ -173,7 +225,10 @@ function Ajout_Voiture() {
               </div>
 
               <div>
-                <label htmlFor="daily_price" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label
+                  htmlFor="daily_price"
+                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                >
                   Prix par jour (FCFA) *
                 </label>
                 <div className="relative">
@@ -189,12 +244,17 @@ function Ajout_Voiture() {
                     placeholder="10000"
                     required
                   />
-                  <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">FCFA</span>
+                  <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">
+                    FCFA
+                  </span>
                 </div>
               </div>
 
               <div>
-                <label htmlFor="status" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label
+                  htmlFor="status"
+                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                >
                   Statut du véhicule *
                 </label>
                 <select
@@ -206,30 +266,71 @@ function Ajout_Voiture() {
                   required
                 >
                   <option value="">Sélectionnez un statut</option>
-                  <option value="Disponible" className="text-green-600">Disponible</option>
-                  <option value="En location" className="text-orange-600">En location</option>
-                  <option value="En maintenance" className="text-red-600">En maintenance</option>
+                  <option value="Disponible" className="text-green-600">
+                    Disponible
+                  </option>
+                  <option value="En location" className="text-orange-600">
+                    En location
+                  </option>
+                  <option value="En maintenance" className="text-red-600">
+                    En maintenance
+                  </option>
                 </select>
               </div>
             </div>
             {/* Footer avec bouton - placé à l'intérieur du formulaire pour activer la validation native */}
             <div className="md:col-span-2 bg-gray-50 dark:bg-gray-700 px-6 py-4 border-t border-gray-200 dark:border-gray-600">
               <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-500 dark:text-gray-400">* Champs obligatoires</span>
+                <span className="text-sm text-gray-500 dark:text-gray-400">
+                  * Champs obligatoires
+                </span>
                 <button
                   type="submit"
                   className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium rounded-lg px-6 py-3 transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 shadow-md"
                 >
                   <span className="flex items-center">
-                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    <svg
+                      className="w-5 h-5 mr-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                      />
                     </svg>
-                    Ajouter la voiture
+                    {initialData ? "Enregistrer" : "Ajouter la voiture"}
                   </span>
                 </button>
               </div>
             </div>
           </form>
+          <Link
+            to="/addvoiture/reservation"
+            className="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg transition-transform transform hover:scale-110"
+          >
+            <button className="p-3">
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="white"
+                  class="size-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M12 9.75 14.25 12m0 0 2.25 2.25M14.25 12l2.25-2.25M14.25 12 12 14.25m-2.58 4.92-6.374-6.375a1.125 1.125 0 0 1 0-1.59L9.42 4.83c.21-.211.497-.33.795-.33H19.5a2.25 2.25 0 0 1 2.25 2.25v10.5a2.25 2.25 0 0 1-2.25 2.25h-9.284c-.298 0-.585-.119-.795-.33Z"
+                  />
+                </svg>
+              </span>
+            </button>
+          </Link>
         </div>
       </div>
     </>

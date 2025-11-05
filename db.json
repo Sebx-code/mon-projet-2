@@ -436,49 +436,19 @@
       "payment_method": "Carte de crédit"
     },
     {
-      "id": "30",
-      "client_name": "Modou Lô",
-      "identity_number": "2122232425261",
-      "client_phone": "+221 78 212 22 32",
-      "client_address": "Parcelles Assainies",
-      "car_model": "Legacy",
-      "license_plate": "IJ567KL",
-      "rental_start": "2024-03-15",
-      "rental_end": "2024-03-18",
-      "daily_price": "64000",
-      "total_price": "192000",
-      "caution": "128000",
-      "payment_method": "Mobile Money"
-    },
-    {
-      "id": "144a",
-      "client_name": "mathieu gerard",
-      "identity_number": "1314151617186",
-      "client_phone": "656642801",
-      "client_address": "Nkolnda",
-      "car_model": "Equinox",
-      "license_plate": "YZ890AB",
-      "rental_start": "2025-10-28",
-      "rental_end": "2025-11-02",
-      "daily_price": "67000",
-      "total_price": "335000.00",
-      "caution": "70000",
+      "id": "a23d",
+      "client_name": "Ella julie",
+      "identity_number": "1314181617186",
+      "client_phone": "678980856",
+      "client_address": "Issam",
+      "car_model": "Rogue",
+      "license_plate": "YZ800AB",
+      "rental_start": "2025-11-06",
+      "rental_end": "2025-11-09",
+      "daily_price": "65000",
+      "total_price": "195000.00",
+      "caution": "90000",
       "payment_method": "paypal"
-    },
-    {
-      "id": "70d8",
-      "client_name": "Joseph Atangana",
-      "identity_number": "1314151617186",
-      "client_phone": "656642801",
-      "client_address": "Nkolnda",
-      "car_model": "Tucson",
-      "license_plate": "YZ890AB",
-      "rental_start": "2025-10-29",
-      "rental_end": "2025-11-02",
-      "daily_price": "70000",
-      "total_price": "280000.00",
-      "caution": "70000",
-      "payment_method": "credit_card"
     }
   ],
   "Ajout_Voiture": [
@@ -593,15 +563,15 @@
       "status": "Disponible"
     },
     {
-      "id": "11",
       "car_type": "SUV",
       "car_model": "RAV 4",
       "license_plate": "KL890MN",
       "year": "2014",
-      "color": "Noire",
-      "mileage": "95000 KM",
+      "color": "grise",
+      "mileage": "130000",
       "daily_price": "48000",
-      "status": "En maintenance"
+      "status": "En maintenance",
+      "id": "11"
     },
     {
       "id": "12",
@@ -800,17 +770,6 @@
       "mileage": "69000 KM",
       "daily_price": "49000",
       "status": "Disponible"
-    },
-    {
-      "id": "30",
-      "car_type": "Berline",
-      "car_model": "Legacy",
-      "license_plate": "IJ567KL",
-      "year": "2021",
-      "color": "Bleue",
-      "mileage": "16000 KM",
-      "daily_price": "64000",
-      "status": "En location"
     }
   ],
   "Chauffeur_Taxi": [

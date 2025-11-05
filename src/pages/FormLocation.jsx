@@ -2,21 +2,22 @@ import { useState } from "react";
 import "../App.css";
 import axios from "axios";
 import db from "../../db.json";
+import { Link } from "react-router-dom";
 
-function FormLocation({ onNavigateBack }) {
+function FormLocation() {
   const [formData, setFormData] = useState({
-    client_name: "",
-    identity_number: "",
-    client_phone: "",
-    client_address: "",
-    car_model: "",
-    license_plate: "",
-    rental_start: "",
-    rental_end: "",
-    daily_price: "",
-    total_price: "",
-    caution: "",
-    payment_method: "",
+    client_name: String,
+    identity_number: String,
+    client_phone: String,
+    client_address: String,
+    car_model: String,
+    license_plate: String,
+    rental_start: Date,
+    rental_end: Date,
+    daily_price: Number,
+    total_price: Number,
+    caution: Number,
+    payment_method: String,
   });
 
   const calculerNombreDeJours = (dateDebut, dateFin) => {
@@ -102,12 +103,14 @@ function FormLocation({ onNavigateBack }) {
         {/* Header avec gradient pour cohérence visuelle */}
         <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-4 rounded-t-2xl">
           <div className="flex items-center justify-between">
+            <Link to="reservation">
             <button
-              onClick={onNavigateBack}
+              // onClick={onNavigateBack}
               className="text-blue-100 underline"
             >
               Retour
             </button>
+            </Link>
             <h1 className="mx-auto w-fit font-bold m-2 text-3xl text-white">
               Formulaire de location de voiture
             </h1>
@@ -116,8 +119,9 @@ function FormLocation({ onNavigateBack }) {
         </div>
 
         <div className="p-5 overflow-x-scroll">
-          <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-            <label htmlFor="client_name">Nom du client :</label>
+          <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-3 text-amber-50">
+            <div className=" flex flex-col">
+              <label htmlFor="client_name">Nom du client :</label>
             <input
               className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               type="text"
@@ -128,8 +132,10 @@ function FormLocation({ onNavigateBack }) {
               placeholder="John Bold"
               required
             />
+            </div>
 
-            <label htmlFor="identity_number">
+            <div className="flex flex-col">
+              <label htmlFor="identity_number">
               Numéro de pièce d'identité :
             </label>
             <input
@@ -141,8 +147,10 @@ function FormLocation({ onNavigateBack }) {
               onChange={handleChange}
               required
             />
+            </div>
 
-            <label htmlFor="client_phone">Téléphone du client :</label>
+            <div className="flex flex-col">
+              <label htmlFor="client_phone">Téléphone du client :</label>
             <input
               className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               type="tel"
@@ -153,8 +161,10 @@ function FormLocation({ onNavigateBack }) {
               placeholder="6 56 64 28 01"
               required
             />
+            </div>
 
-            <label htmlFor="client_address">Adresse du client :</label>
+            <div className="flex flex-col">
+              <label htmlFor="client_address">Adresse du client :</label>
             <input
               className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               type="text"
@@ -165,8 +175,10 @@ function FormLocation({ onNavigateBack }) {
               placeholder="Nkolnda"
               required
             />
+            </div>
 
-            <label htmlFor="car_model">Modèle de la voiture :</label>
+            <div className="flex flex-col">
+              <label htmlFor="car_model">Modèle de la voiture :</label>
             <select
               className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               id="car_model"
@@ -182,8 +194,10 @@ function FormLocation({ onNavigateBack }) {
                 </option>
               ))}
             </select>
+            </div>
 
-            <label htmlFor="license_plate">Immatriculation du véhicule :</label>
+            <div className="flex flex-col">
+              <label htmlFor="license_plate">Immatriculation du véhicule :</label>
             <input
               className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               type="text"
@@ -193,8 +207,10 @@ function FormLocation({ onNavigateBack }) {
               onChange={handleChange}
               required
             />
+            </div>
 
-            <label htmlFor="rental_start">Date de début :</label>
+            <div className="flex flex-col">
+              <label htmlFor="rental_start">Date de début :</label>
             <input
               className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               type="date"
@@ -204,8 +220,10 @@ function FormLocation({ onNavigateBack }) {
               onChange={handleChange}
               required
             />
+            </div>
 
-            <label htmlFor="rental_end">Date de fin :</label>
+            <div className="flex flex-col">
+              <label htmlFor="rental_end">Date de fin :</label>
             <input
               className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               type="date"
@@ -216,8 +234,10 @@ function FormLocation({ onNavigateBack }) {
               onChange={handleChange}
               required
             />
+            </div>
 
-            <label htmlFor="daily_price">Prix par jour :</label>
+            <div className="flex flex-col">
+              <label htmlFor="daily_price">Prix par jour :</label>
             <input
               className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               type="number"
@@ -228,8 +248,10 @@ function FormLocation({ onNavigateBack }) {
               readOnly
               required
             />
+            </div>
 
-            <label htmlFor="total_price">Prix total :</label>
+            <div className="flex flex-col">
+              <label htmlFor="total_price">Prix total :</label>
             <input
               className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               type="text"
@@ -238,8 +260,10 @@ function FormLocation({ onNavigateBack }) {
               value={formData.total_price}
               readOnly
             />
+            </div>
 
-            <label htmlFor="caution">Caution :</label>
+            <div className="flex flex-col">
+              <label htmlFor="caution">Caution :</label>
             <input
               className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               type="text"
@@ -249,8 +273,10 @@ function FormLocation({ onNavigateBack }) {
               onChange={handleChange}
               required
             />
+            </div>
 
-            <label htmlFor="payment_method">Mode de paiement :</label>
+            <div className="flex flex-col">
+              <label htmlFor="payment_method">Mode de paiement :</label>
             <select
               className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               id="payment_method"
@@ -265,8 +291,9 @@ function FormLocation({ onNavigateBack }) {
               <option value="bank_transfer">Virement</option>
               <option value="orange_money">Chèque</option>
             </select>
+            </div>
 
-            <div className="mt-4 flex justify-end">
+            <div className="mt-4 flex">
               <button
                 type="submit"
                 className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium rounded-lg px-6 py-3 transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 shadow-md"
